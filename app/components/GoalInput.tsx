@@ -1,12 +1,24 @@
 import { useState } from "react";
-import { Button, Modal, StyleSheet, TextInput, View } from "react-native";
+import {
+  Button,
+  Image,
+  Modal,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 
 type GoalInputPros = {
   onAddGoal: (goalText: string) => void;
   visible: boolean;
+  onCancel: () => void;
 };
 
-export default function GoalInput({ onAddGoal, visible }: GoalInputPros) {
+export default function GoalInput({
+  onAddGoal,
+  visible,
+  onCancel,
+}: GoalInputPros) {
   const [enteredGoalText, setEnteredGoalText] = useState("");
 
   function goalInputHandler(enteredText: string) {
@@ -21,6 +33,10 @@ export default function GoalInput({ onAddGoal, visible }: GoalInputPros) {
   return (
     <Modal visible={visible} animationType="slide">
       <View style={styles.inputContainer}>
+        <Image
+          source={require("../../assets/images/n14.jpg")}
+          style={styles.image}
+        />
         <TextInput
           style={styles.textInput}
           placeholder="Your Course Goal!"
@@ -29,10 +45,10 @@ export default function GoalInput({ onAddGoal, visible }: GoalInputPros) {
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <Button title="Add Goal" onPress={addGoalHandler} />
+            <Button title="Cancel" onPress={onCancel} color="#f31282" />
           </View>
           <View style={styles.button}>
-            <Button title="Cancel" onPress={addGoalHandler} />
+            <Button title="Add Goal" onPress={addGoalHandler} color="#b180f0" />
           </View>
         </View>
       </View>
@@ -45,16 +61,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
     padding: 16,
-    borderBottomWidth: 1,
-    borderColor: "#cccccc",
+    backgroundColor: "#311b6b",
   },
+  image: { width: 450, height: 470, margin: 20 },
   textInput: {
     borderWidth: 1,
-    borderColor: "#cccccc",
+    borderColor: "#e4d0ff",
+    backgroundColor: "#e4d0ff",
+    color: "#120438",
+    borderRadius: 6,
     width: "100%",
-    padding: 8,
+    padding: 16,
   },
   buttonContainer: {
     marginTop: 16,
